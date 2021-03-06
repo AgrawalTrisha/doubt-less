@@ -9,20 +9,20 @@ class WoodsScene extends Phaser.Scene {
   }
 
   create() {
-  //   this.anims.create({
-  //     key: "desktop_anim",
-  //     frames: this.anims.generateFrameNumbers("desktop"),
-  //     frameRate: 5,
-  //     repeat: -1
-  //   });
-  //   console.log("on StartScene");
-  //   this.desktop = this.add.sprite(0,0,"desktop");
-  //   this.desktop.setOrigin(0,0);
-  //   this.desktop.play("desktop_anim");
-  //   this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-  // }
+    // this.anims.create({
+    //   key: "desktop_anim",
+    //   frames: this.anims.generateFrameNumbers("desktop"),
+    //   frameRate: 5,
+    //   repeat: -1
+    // });
+    console.log("on WoodsScene");
+    // this.desktop = this.add.sprite(0,0,"desktop");
+    // this.desktop.setOrigin(0,0);
+    // this.desktop.play("desktop_anim");
+    // this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  }
 
-  // update() {
+  update() {
   //   if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
   //     console.log("spacebar clicked on StartScene");
   //     var newtextbox = new StartScreenTextBox(this,"hi",70,30);

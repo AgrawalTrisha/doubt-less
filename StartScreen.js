@@ -20,16 +20,18 @@ class StartScreen extends Phaser.Scene {
     this.desktop.setOrigin(0,0);
     this.desktop.play("desktop_anim");
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.enterkey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
   }
 
   update() {
     if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
       console.log("spacebar clicked on StartScene");
       var newtextbox = new StartScreenTextBox(this,"hi",70,30);
-      if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-        console.log("spacebar clicked AGAIN on StartScene");
-        this.scene.start("woods-scene");
-      }
+    }
+    if(Phaser.Input.Keyboard.JustDown(this.enterkey)) {
+      console.log("enterkey clicked on StartScene");
+      this.scene.start("woods-scene");
     }
   }
 }
