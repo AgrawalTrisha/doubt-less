@@ -20,9 +20,16 @@ class WoodsScene extends Phaser.Scene {
     this.woodsClose.setOrigin(0,0);
     this.woodsClose.setScrollFactor(0);
     console.log("on WoodsScene");
+    this.cursorKeys = this.input.keyboard.createCursorKeys();
   }
 
   update() {
+    if(this.cursorKeys.left.isDown) {
+      this.backgroundMove(-1);
+    } else 
+    if(this.cursorKeys.right.isDown) {
+      this.backgroundMove(1);
+    }
   //   if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
   //     console.log("spacebar clicked on StartScene");
   //     var newtextbox = new StartScreenTextBox(this,"hi",70,30);
@@ -32,4 +39,18 @@ class WoodsScene extends Phaser.Scene {
   //     }
   //   }
   }
+
+  backgroundMove(direction) {
+    if(direction === -1) {
+      this.woodsFar.tilePositionX -= 0.05;
+      this.woodsMid.tilePositionX -= 0.1;
+      this.woodsClose.tilePositionX -= 0.15;
+    }
+    if(direction === 1) {
+      this.woodsFar.tilePositionX += 0.05;
+      this.woodsMid.tilePositionX += 0.1;
+      this.woodsClose.tilePositionX += 0.15;
+    }
+  }
+
 }
