@@ -27,26 +27,26 @@ class WoodsScene extends Phaser.Scene {
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-    player = this.physics.add.sprite(0,0,'radhika')
+    this.player = this.physics.add.sprite(0,0,'radhika');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
       frameRate: 10,
       repeat: -1
-  });
+    });
 
-  this.anims.create({
-      key: 'turn',
-      frames: [ { key: 'radhika', frame: 8 } ],
-      frameRate: 20
-  });
+    this.anims.create({
+        key: 'turn',
+        frames: [ { key: 'radhika', frame: 8 } ],
+        frameRate: 20
+    });
 
-  this.anims.create({
-      key: 'right',
-      frames: this.anims.generateFrameNumbers('radhika', { start: 9, end: 16 }),
-      frameRate: 10,
-      repeat: -1
-  });
+    this.anims.create({
+        key: 'right',
+        frames: this.anims.generateFrameNumbers('radhika', { start: 9, end: 16 }),
+        frameRate: 10,
+        repeat: -1
+    });
   }
 
   update() {

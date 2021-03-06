@@ -1,6 +1,13 @@
 var config = {
   width: 360,
   height: 272,
+  physics: {
+      default: 'arcade',
+      arcade: {
+          gravity: { y: 300 },
+          debug: false
+      }
+  },
   scale: {
     parent: 'yourgamediv',
     mode: Phaser.Scale.NONE,
