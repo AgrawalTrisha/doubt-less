@@ -17,6 +17,7 @@ class Opening extends Phaser.Scene {
   update() {
     if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
       console.log("spacebar clicked on Opening");
+      this.scene.start("start-screen");
     }
   }
 }
