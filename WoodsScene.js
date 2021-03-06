@@ -36,7 +36,7 @@ class WoodsScene extends Phaser.Scene {
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
     this.player = this.physics.add.sprite(400,212,'radhika');
-    this.slime = this.physics.add.sprite(420, 200, 'slime');
+    this.slime = this.physics.add.sprite(450, 200, 'slime');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
