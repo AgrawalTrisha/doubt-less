@@ -5,8 +5,7 @@ class StartScreen extends Phaser.Scene {
 
   preload() {
     this.load.spritesheet("desktop", "assets/desktopspritesheet.png", {frameWidth:360, frameHeight: 272});
-    this.load.image("textbox", "assets/textbox.png");
-    
+    this.load.image("desktop-textbox", "assets/desktoptextbox.png");
   }
 
   create() {
@@ -26,6 +25,7 @@ class StartScreen extends Phaser.Scene {
   update() {
     if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
       console.log("spacebar clicked on StartScene");
+      var newtextbox = new StartScreenTextBox(this,"hi",70,30);
     }
   }
 }
