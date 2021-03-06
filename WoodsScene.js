@@ -9,6 +9,7 @@ class WoodsScene extends Phaser.Scene {
     this.load.image("woods-close", "assets/woods-close-trees.png");
     this.load.image("ground", "assets/ground.png");
     this.load.spritesheet("radhika", "assets/radhikaspritesheet.png", {frameWidth: 33, frameHeight: 44});
+    this.load.spritesheet("slime", "assets/slime.png", {frameWidth: 16, frameHeight: 12});
   }
 
   create() {
@@ -35,6 +36,7 @@ class WoodsScene extends Phaser.Scene {
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
     this.player = this.physics.add.sprite(400,212,'radhika');
+    this.slime = this.physics.add.sprite(420, 200, 'slime');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
@@ -54,6 +56,14 @@ class WoodsScene extends Phaser.Scene {
         frameRate: 10,
         repeat: -1
     });
+    this.anims.create({
+        key: 'slime-anim',
+        frames: this.anims.generateFrameNumbers('slime'),
+        frameRate: 5,
+        repeat: -1,
+        repeatDelay: 1500
+    });
+    this.slime.anims.play("slime-anim");
   }
 
   update() {
@@ -71,7 +81,7 @@ class WoodsScene extends Phaser.Scene {
       this.player.anims.play('turn');
     }
     this.physics.world.collide(this.player,this.ground);
-    // this.cameras = new Camera(0,0,game.config.width,game.config.height);
+    this.physics.world.collide(this.slime,this.ground);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setFollowOffset(-163, 76);
   //   if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
