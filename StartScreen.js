@@ -8,7 +8,7 @@ class StartScreen extends Phaser.Scene {
     this.load.image("choicebox", "assets/textboxes/choicebox.png");
     this.load.image("tb1", "assets/textboxes/radhika.png");
     this.load.image("tb2", "assets/textboxes/maybeyoushould.png");
-    this.load.image("tb2", "assets/textboxes/takeabreak.png");
+    this.load.image("tb3", "assets/textboxes/takeabreak.png");
     this.load.image("rcp-angry", "assets/RCP_angry.png");
     this.load.image("rcp-tired", "assets/RCP_tired.png");
     this.load.image("rcp-side", "assets/RCP_side.png");
@@ -28,8 +28,9 @@ class StartScreen extends Phaser.Scene {
     this.desktop.play("desktop_anim");
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.counter = 1;
+    this.counter = 0;
     this.choicenum = 1;
+    this.counter2 = 0;
   }
 
   update() {
@@ -60,12 +61,18 @@ class StartScreen extends Phaser.Scene {
       this.choicebox = new ChoiceTextbox(this, ["No.", "I'm not going to do that."], this.counter);
       // console.log(this.counter);
     } else if(this.num === 4) {
-      this.choicebox.setVisible(false);
-      this.radhika.setVisible(false);
-      console.log('huh');
-    } else if(this.num === 5) {
-      this.tb3 = this.add.sprite(15, 40, "tb3");
+      this.tb3 = this.add.sprite(15, 90, "tb3");
       this.tb3.setOrigin(0,0);
+      if(this.cursorKeys.down.isDown && this.counter2 < this.choicenum) {
+        console.log("down detected");
+        this.counter2 += 1;
+      } else if(this.cursorKeys.up.isDown && this.counter2 > 0) {
+        console.log("up detected");
+        this.counter2 -= 1;
+      }        
+      this.choicebox = new ChoiceTextbox(this, ["Fine.", "Alright."], this.counter2);
+    } else if(this.num === 5) {
+      
     }
     
     else {

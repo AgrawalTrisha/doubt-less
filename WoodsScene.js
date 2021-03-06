@@ -9,7 +9,7 @@ class WoodsScene extends Phaser.Scene {
     this.load.image("woods-close", "assets/woods-close-trees.png");
     this.load.image("ground", "assets/ground.png");
     this.load.spritesheet("radhika", "assets/radhikaspritesheet.png", {frameWidth: 33, frameHeight: 44});
-    this.load.spritesheet("slime", "assets/slime.png", {frameWidth: 16, frameHeight: 12});
+    this.load.spritesheet("slime", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
   }
 
   create() {
@@ -34,8 +34,8 @@ class WoodsScene extends Phaser.Scene {
     console.log("on WoodsScene");
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
-
-    this.player = this.physics.add.sprite(400,212,'radhika');
+    this.slimePlayerCollide = false;
+    this.player = this.physics.add.sprite(400, 212, 'radhika');
     this.slime = this.physics.add.sprite(450, 200, 'slime');
     this.anims.create({
       key: 'left',
@@ -58,10 +58,16 @@ class WoodsScene extends Phaser.Scene {
     });
     this.anims.create({
         key: 'slime-anim',
-        frames: this.anims.generateFrameNumbers('slime'),
+        frames: this.anims.generateFrameNumbers('slime', { start: 0, end: 1 }),
         frameRate: 5,
         repeat: -1,
         repeatDelay: 1500
+    });
+    this.anims.create({
+        key: 'slime-death',
+        frames: this.anims.generateFrameNumbers('slime', { start: 0, end: 6 }),
+        frameRate: 5,
+        repeat: 0,
     });
     this.slime.anims.play("slime-anim");
   }
@@ -84,6 +90,16 @@ class WoodsScene extends Phaser.Scene {
     this.physics.world.collide(this.slime,this.ground);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setFollowOffset(-80, 76);
+    if(this.slime.x < this.player.x + 100 && this.slime.x > this.player.x + 50) {
+      this.slime.setVelocityX(-4);
+    } else if(this.slime.x > this.player.x - 100 && this.slime.x < this.player.x - 50) {
+      this.slime.setVelocityX(4);
+    } else {
+      this.slime.setVelocityX(0);
+    }
+    if(this.player.x < this.slime.x + 2 && this.player.x > this.slime.x - 2) {
+      this.slime.anims.play("slime-death");
+    }
   //   if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
   //     console.log("spacebar clicked on StartScene");
   //     var newtextbox = new StartScreenTextBox(this,"hi",70,30);
