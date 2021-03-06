@@ -83,7 +83,7 @@ class WoodsScene extends Phaser.Scene {
     this.physics.world.collide(this.player,this.ground);
     this.physics.world.collide(this.slime,this.ground);
     this.cameras.main.startFollow(this.player);
-    this.cameras.main.setFollowOffset(-163, 76);
+    this.cameras.main.setFollowOffset(-80, 76);
   //   if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
   //     console.log("spacebar clicked on StartScene");
   //     var newtextbox = new StartScreenTextBox(this,"hi",70,30);
