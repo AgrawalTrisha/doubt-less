@@ -4,22 +4,22 @@ class WoodsScene extends Phaser.Scene {
   }
 
   preload() {
-    // this.load.spritesheet("desktop", "assets/desktopspritesheet.png", {frameWidth:360, frameHeight: 272});
-    // this.load.image("desktop-textbox", "assets/desktoptextbox.png");
+    this.load.image("woods-far", "assets/woods-far-trees.png");
+    this.load.image("woods-mid", "assets/woods-mid-trees.png");
+    this.load.image("woods-close", "assets/woods-close-trees.png");
   }
 
   create() {
-    // this.anims.create({
-    //   key: "desktop_anim",
-    //   frames: this.anims.generateFrameNumbers("desktop"),
-    //   frameRate: 5,
-    //   repeat: -1
-    // });
+    this.woodsFar = this.add.tileSprite(0,0,game.config.width,game.config.height,"woods-far");
+    this.woodsFar.setOrigin(0,0);
+    this.woodsFar.setScrollFactor(0);
+    this.woodsMid = this.add.tileSprite(0,0,game.config.width,game.config.height,"woods-mid");
+    this.woodsMid.setOrigin(0,0);
+    this.woodsMid.setScrollFactor(0);
+    this.woodsClose = this.add.tileSprite(0,0,game.config.width,game.config.height,"woods-close");
+    this.woodsClose.setOrigin(0,0);
+    this.woodsClose.setScrollFactor(0);
     console.log("on WoodsScene");
-    // this.desktop = this.add.sprite(0,0,"desktop");
-    // this.desktop.setOrigin(0,0);
-    // this.desktop.play("desktop_anim");
-    // this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   }
 
   update() {
