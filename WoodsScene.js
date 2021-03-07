@@ -124,7 +124,7 @@ class WoodsScene extends Phaser.Scene {
         this.player.anims.play('turn');
       }
       if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-        
+        this.scene.start("closing-screen");
       }
     }
     this.physics.world.collide(this.player,this.ground);
