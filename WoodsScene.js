@@ -39,20 +39,12 @@ class WoodsScene extends Phaser.Scene {
 
     console.log("on WoodsScene");
 
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.slimePlayerCollide = false;
-    this.player = this.physics.add.sprite(100, 212, 'radhika');
+    this.player = this.physics.add.sprite(5000, 212, 'radhika');
     this.slime = this.physics.add.sprite(450, 200, 'slime');
-    this.slime1 = this.physics.add.sprite(500, 200, 'slime1');
     console.log(this.slime.x);
-    console.log(this.slime1.x);
-    // this.slime2 = this.physics.add.sprite(1940, 200, 'slime');
-    // this.slime3 = this.physics.add.sprite(2620, 200, 'slime');
-    // this.slime4 = this.physics.add.sprite(3740, 200, 'slime');
-    // this.slime5 = this.physics.add.sprite(4360, 200, 'slime');
-    // this.slime6 = this.physics.add.sprite(5050, 200, 'slime');
-    // this.slime7 = this.physics.add.sprite(5950, 200, 'slime');
-    // this.slime8 = this.physics.add.sprite(6630, 200, 'slime');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
@@ -86,14 +78,6 @@ class WoodsScene extends Phaser.Scene {
         repeat: 0,
     });
     this.slime.anims.play("slime-anim");
-    this.slime1.anims.play("slime-anim");
-    // this.slime2.anims.play("slime-anim");
-    // this.slime3.anims.play("slime-anim");
-    // this.slime4.anims.play("slime-anim");
-    // this.slime5.anims.play("slime-anim");
-    // this.slime6.anims.play("slime-anim");
-    // this.slime7.anims.play("slime-anim");
-    // this.slime8.anims.play("slime-anim");
     this.test = this.add.text(390,25,"you should quit while you're ahead.",{ font: "16px Arial", fill: '#DA5E53'});
     this.test = this.add.text(680,240,"i'm not going to quit.",{ font: "16px Arial", fill: '#F6A6A9'});
     this.test = this.add.text(880,25,"not even your dad thinks you should keep going.",{ font: "16px Arial", fill: '#DA5E53'});    
@@ -112,6 +96,7 @@ class WoodsScene extends Phaser.Scene {
     this.test = this.add.text(6200,240,"no one can tell me whether i belong or don't.",{ font: "16px Arial", fill: '#F6A6A9'});
     this.test = this.add.text(6600,25,"but you can't-",{ font: "16px Arial", fill: '#DA5E53'});
     this.test = this.add.text(6800,240,"i believe in myself.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(7005,245,"[SPACE] to continue",{ font: "12px Arial", fill: '#FFFFFF'});
   }
 
   update() {
@@ -130,8 +115,17 @@ class WoodsScene extends Phaser.Scene {
         this.player.anims.play('turn');
       }
     } else {
-      this.player.setVelocityX(0);
-      this.player.anims.play('turn');
+      if(this.cursorKeys.left.isDown) {
+        this.backgroundMove(-1);
+        this.player.setVelocityX(-40);
+        this.player.anims.play('left', true);
+      } else {
+        this.player.setVelocityX(0);
+        this.player.anims.play('turn');
+      }
+      if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+        
+      }
     }
     this.physics.world.collide(this.player,this.ground);
     this.physics.world.collide(this.slime,this.ground);
