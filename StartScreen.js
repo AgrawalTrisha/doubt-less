@@ -31,6 +31,8 @@ class StartScreen extends Phaser.Scene {
     this.counter = 0;
     this.choicenum = 1;
     this.counter2 = 0;
+    console.log(this.cameras.main.x);
+    console.log(this.cameras.main.y);
   }
 
   update() {
@@ -58,8 +60,7 @@ class StartScreen extends Phaser.Scene {
         console.log("up detected");
         this.counter -= 1;
       }        
-      this.choicebox = new ChoiceTextbox(this, ["No.", "I'm not going to do that."], this.counter);
-      // console.log(this.counter);
+      this.choicebox = new ChoiceTextbox(this, ["No.", "I'm not going to do that."], this.counter, 135, 238);
     } else if(this.num === 4) {
       this.tb3 = this.add.sprite(15, 90, "tb3");
       this.tb3.setOrigin(0,0);
@@ -70,12 +71,8 @@ class StartScreen extends Phaser.Scene {
         console.log("up detected");
         this.counter2 -= 1;
       }        
-      this.choicebox = new ChoiceTextbox(this, ["Fine.", "Alright."], this.counter2);
-    } else if(this.num === 5) {
-      
-    }
-    
-    else {
+      this.choicebox = new ChoiceTextbox(this, ["Fine.", "Alright."], this.counter2, 135, 238);
+    } else {
       this.scene.start("woods-scene");
     }
   }

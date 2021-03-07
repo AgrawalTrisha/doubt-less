@@ -10,6 +10,14 @@ class WoodsScene extends Phaser.Scene {
     this.load.image("ground", "assets/ground.png");
     this.load.spritesheet("radhika", "assets/radhikaspritesheet.png", {frameWidth: 33, frameHeight: 44});
     this.load.spritesheet("slime", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime1", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime2", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime3", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime4", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime5", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime6", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime7", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
+    this.load.spritesheet("slime8", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
   }
 
   create() {
@@ -25,18 +33,26 @@ class WoodsScene extends Phaser.Scene {
     this.woodsClose.setOrigin(0,0);
     this.woodsClose.setScrollFactor(0);
 
-    this.ground = this.add.tileSprite(0,234,game.config.width * 10, 38,"ground");
-    // this.ground = this.physics.add.staticImage(0,234, "ground");
+    this.ground = this.add.tileSprite(0,234,game.config.width * 20, 38,"ground");
     this.ground.setOrigin(0,0);
-    // this.ground.refreshBody();
     this.physics.add.existing(this.ground, true);
 
     console.log("on WoodsScene");
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.slimePlayerCollide = false;
-    this.player = this.physics.add.sprite(400, 212, 'radhika');
+    this.player = this.physics.add.sprite(100, 212, 'radhika');
     this.slime = this.physics.add.sprite(450, 200, 'slime');
+    this.slime1 = this.physics.add.sprite(500, 200, 'slime1');
+    console.log(this.slime.x);
+    console.log(this.slime1.x);
+    // this.slime2 = this.physics.add.sprite(1940, 200, 'slime');
+    // this.slime3 = this.physics.add.sprite(2620, 200, 'slime');
+    // this.slime4 = this.physics.add.sprite(3740, 200, 'slime');
+    // this.slime5 = this.physics.add.sprite(4360, 200, 'slime');
+    // this.slime6 = this.physics.add.sprite(5050, 200, 'slime');
+    // this.slime7 = this.physics.add.sprite(5950, 200, 'slime');
+    // this.slime8 = this.physics.add.sprite(6630, 200, 'slime');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
@@ -70,18 +86,49 @@ class WoodsScene extends Phaser.Scene {
         repeat: 0,
     });
     this.slime.anims.play("slime-anim");
+    this.slime1.anims.play("slime-anim");
+    // this.slime2.anims.play("slime-anim");
+    // this.slime3.anims.play("slime-anim");
+    // this.slime4.anims.play("slime-anim");
+    // this.slime5.anims.play("slime-anim");
+    // this.slime6.anims.play("slime-anim");
+    // this.slime7.anims.play("slime-anim");
+    // this.slime8.anims.play("slime-anim");
+    this.test = this.add.text(390,25,"you should quit while you're ahead.",{ font: "16px Arial", fill: '#DA5E53'});
+    this.test = this.add.text(680,240,"i'm not going to quit.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(880,25,"not even your dad thinks you should keep going.",{ font: "16px Arial", fill: '#DA5E53'});    
+    this.test = this.add.text(1290,240,"he just doesn't want to see me disappointed, after all my studying.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(1830,25,"studying? you qualified through luck.",{ font: "16px Arial", fill: '#DA5E53'});   
+    this.test = this.add.text(2150,240,"that's not true. i studied hard, and it paid off.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(2527,25,"it was luck, and it's going to run out.",{ font: "16px Arial", fill: '#DA5E53'});
+    this.test = this.add.text(2900,240,"i've been working hard. i qualified for this competition, and i have a shot at winning.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(3576,25,"what if you don't win? what if you don't even place?",{ font: "16px Arial", fill: '#DA5E53'});
+    this.test = this.add.text(4030,240,"what if i win first place?",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(4276,25,"what if you come in last?",{ font: "16px Arial", fill: '#DA5E53'});
+    this.test = this.add.text(4520,240,"then i'll be proud that i came this far.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(4850,25,"have you ever seen anyone like you at a competition?",{ font: "16px Arial", fill: '#DA5E53'});
+    this.test = this.add.text(5350,240,"if i can be the first like me to succeed, i'll inspire others.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(5810,25,"it's proof that you really don't belong in CS.",{ font: "16px Arial", fill: '#DA5E53'});
+    this.test = this.add.text(6200,240,"no one can tell me whether i belong or don't.",{ font: "16px Arial", fill: '#F6A6A9'});
+    this.test = this.add.text(6600,25,"but you can't-",{ font: "16px Arial", fill: '#DA5E53'});
+    this.test = this.add.text(6800,240,"i believe in myself.",{ font: "16px Arial", fill: '#F6A6A9'});
   }
 
   update() {
-    if(this.cursorKeys.left.isDown) {
-      this.backgroundMove(-1);
-      this.player.setVelocityX(-40);
-      this.player.anims.play('left', true);
-    } else 
-    if(this.cursorKeys.right.isDown) {
-      this.backgroundMove(1);
-      this.player.setVelocityX(40);
-      this.player.anims.play('right', true);
+    if(this.player.x < 6860) {
+      if(this.cursorKeys.left.isDown) {
+        this.backgroundMove(-1);
+        this.player.setVelocityX(-40);
+        this.player.anims.play('left', true);
+      } else 
+      if(this.cursorKeys.right.isDown) {
+        this.backgroundMove(1);
+        this.player.setVelocityX(400);
+        this.player.anims.play('right', true);
+      } else {
+        this.player.setVelocityX(0);
+        this.player.anims.play('turn');
+      }
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play('turn');
@@ -90,24 +137,16 @@ class WoodsScene extends Phaser.Scene {
     this.physics.world.collide(this.slime,this.ground);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setFollowOffset(-80, 76);
+    // console.log(this.player.x);
+
     if(this.slime.x < this.player.x + 100 && this.slime.x > this.player.x + 50) {
-      this.slime.setVelocityX(-4);
+      this.slime.setVelocityX(-39);
     } else if(this.slime.x > this.player.x - 100 && this.slime.x < this.player.x - 50) {
-      this.slime.setVelocityX(4);
+      this.slime.setVelocityX(39);
     } else {
       this.slime.setVelocityX(0);
     }
-    if(this.player.x < this.slime.x + 2 && this.player.x > this.slime.x - 2) {
-      this.slime.anims.play("slime-death");
-    }
-  //   if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-  //     console.log("spacebar clicked on StartScene");
-  //     var newtextbox = new StartScreenTextBox(this,"hi",70,30);
-  //     if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-  //       console.log("spacebar clicked AGAIN on StartScene");
-  //       this.scene.start("woods-scene");
-  //     }
-  //   }
+    
   }
 
   backgroundMove(direction) {
@@ -122,5 +161,4 @@ class WoodsScene extends Phaser.Scene {
       this.woodsClose.tilePositionX += 0.17;
     }
   }
-
 }
