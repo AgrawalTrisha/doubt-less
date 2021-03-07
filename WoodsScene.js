@@ -39,7 +39,7 @@ class WoodsScene extends Phaser.Scene {
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.slimePlayerCollide = false;
-    this.player = this.physics.add.sprite(120, 212, 'radhika');
+    this.player = this.physics.add.sprite(6660, 212, 'radhika');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
@@ -113,7 +113,7 @@ class WoodsScene extends Phaser.Scene {
         this.num += 1;
       }
       if(this.num === 0) {
-        this.transition = this.add.sprite(6767,0,"transition");
+        this.transition = this.add.sprite(6761,0,"transition");
         this.transition.setOrigin(0,0);
         this.transition.play("transition_on");
       } else if(this.num === 1) {

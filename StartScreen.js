@@ -12,9 +12,12 @@ class StartScreen extends Phaser.Scene {
     this.load.image("rcp-angry", "assets/RCP_angry.png");
     this.load.image("rcp-tired", "assets/RCP_tired.png");
     this.load.image("rcp-side", "assets/RCP_side.png");
+    this.load.audio("music", "assets/audio.mp3");
   }
 
   create() {
+    this.music = this.sound.add("music", {loop: true});
+    this.music.play();
     this.num = -1;
     this.anims.create({
       key: "desktop_anim",
