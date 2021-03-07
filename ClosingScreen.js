@@ -22,6 +22,9 @@ class ClosingScreen extends Phaser.Scene {
     this.radhika = this.add.sprite(310,272-46, "rcp-tired");
     this.add.sprite(135, 238, "choicebox");
     this.words = this.add.text(20,220,"I just closed my eyes for a moment...",{ font: "12px Arial", fill: '#405A66' });
+    this.transition = this.add.sprite(0,0,"transition");
+    this.transition.setOrigin(0,0);
+    this.transition.play("transition_off");
   }
 
   update() {
@@ -36,6 +39,10 @@ class ClosingScreen extends Phaser.Scene {
       } else if(this.num === 2) {
         this.words3.alpha = 0;
         this.words4 = this.add.text(20,218,"*sigh*. I'd better turn in for the night.\nI want to be well-rested for the state\nprogramming competition tomorrow.",{ font: "12px Arial", fill: '#405A66' });
+      } else if(this.num === 3) {
+        this.transition = this.add.sprite(0,0,"transition");
+        this.transition.setOrigin(0,0);
+        this.transition.play("transition_on");
       } else {
         this.scene.start("credits-screen");
       }

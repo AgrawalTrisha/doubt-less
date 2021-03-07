@@ -15,7 +15,7 @@ class StartScreen extends Phaser.Scene {
   }
 
   create() {
-    this.num = 0;
+    this.num = -1;
     this.anims.create({
       key: "desktop_anim",
       frames: this.anims.generateFrameNumbers("desktop"),
@@ -31,8 +31,9 @@ class StartScreen extends Phaser.Scene {
     this.counter = 0;
     this.choicenum = 1;
     this.counter2 = 0;
-    console.log(this.cameras.main.x);
-    console.log(this.cameras.main.y);
+    this.transition = this.add.sprite(0,0,"transition");
+    this.transition.setOrigin(0,0);
+    this.transition.play("transition_off");
   }
 
   update() {
@@ -40,18 +41,22 @@ class StartScreen extends Phaser.Scene {
       console.log("this.num = " + this.num);
       this.num += 1;
     }
-    if(this.num === 0) {
+    if(this.num === -1) {
+    } else if(this.num === 0) {
       this.radhika = this.add.sprite(310,272-46, "rcp-side");
     } else if(this.num === 1) {
       this.tb1 = this.add.sprite(15, 10, "tb1");
       this.tb1.setOrigin(0,0);
-      // this.something = this.add.sprite(60,20, "desktop-textbox");
-      // this.add.text(8, 8, 'Phaser 3 pixelArt: true', { font: '12px Consolas', fill: '#405A66' }).setOrigin(0, 0);
+      this.words = this.add.text(25,16,"Radhika...",{ font: "14px Arial", fill: '#405A66' });
     } else if(this.num === 2) {
+      this.add.sprite(135, 238, "choicebox");
+      this.words = this.add.text(20,220,"Yeah, Dad?",{ font: "12px Arial", fill: '#405A66' });
+    } else if(this.num === 3) {
       this.radhika = this.add.sprite(310,272-46, "rcp-tired");
       this.tb2 = this.add.sprite(15, 40, "tb2");
+      this.words = this.add.text(24, 45,"Maybe you should\nquit while you're ahead.",{ font: "14px Arial", fill: '#405A66' });
       this.tb2.setOrigin(0,0);
-    } else if(this.num === 3) {
+    } else if(this.num === 4) {
       this.radhika = this.add.sprite(310,272-46, "rcp-angry");
       if(this.cursorKeys.down.isDown && this.counter < this.choicenum) {
         console.log("down detected");
@@ -61,8 +66,10 @@ class StartScreen extends Phaser.Scene {
         this.counter -= 1;
       }        
       this.choicebox = new ChoiceTextbox(this, ["No.", "I'm not going to do that."], this.counter, 135, 238);
-    } else if(this.num === 4) {
-      this.tb3 = this.add.sprite(15, 90, "tb3");
+    } else if(this.num === 5) {
+      this.tb3 = this.add.sprite(15, 85, "tb2");
+      this.words = this.add.text(22, 92,"At least take a break, then.\nYou've been at it for a while.",{ font: "12px Arial", fill: '#405A66' });
+      this.tb2.setOrigin(0,0);
       this.tb3.setOrigin(0,0);
       if(this.cursorKeys.down.isDown && this.counter2 < this.choicenum) {
         console.log("down detected");
@@ -72,6 +79,10 @@ class StartScreen extends Phaser.Scene {
         this.counter2 -= 1;
       }        
       this.choicebox = new ChoiceTextbox(this, ["Fine.", "Alright."], this.counter2, 135, 238);
+    } else if(this.num === 6) {
+      this.transition = this.add.sprite(0,0,"transition");
+      this.transition.setOrigin(0,0);
+      this.transition.play("transition_on");
     } else {
       this.scene.start("woods-scene");
     }

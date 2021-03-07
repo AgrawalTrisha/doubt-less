@@ -4,23 +4,20 @@ class WoodsScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image("woods-bg", "assets/woods-bg.png");
     this.load.image("woods-far", "assets/woods-far-trees.png");
     this.load.image("woods-mid", "assets/woods-mid-trees.png");
     this.load.image("woods-close", "assets/woods-close-trees.png");
     this.load.image("ground", "assets/ground.png");
     this.load.spritesheet("radhika", "assets/radhikaspritesheet.png", {frameWidth: 33, frameHeight: 44});
     this.load.spritesheet("slime", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime1", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime2", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime3", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime4", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime5", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime6", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime7", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
-    this.load.spritesheet("slime8", "assets/slime.png", {frameWidth: 19, frameHeight: 12});
   }
 
   create() {
+    this.woodsBg = this.add.tileSprite(0,0,game.config.width,game.config.height,"woods-bg");
+    this.woodsBg.setOrigin(0,0);
+    this.woodsBg.setScrollFactor(0);
+
     this.woodsFar = this.add.tileSprite(0,0,game.config.width,game.config.height,"woods-far");
     this.woodsFar.setOrigin(0,0);
     this.woodsFar.setScrollFactor(0);
@@ -42,9 +39,7 @@ class WoodsScene extends Phaser.Scene {
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.slimePlayerCollide = false;
-    this.player = this.physics.add.sprite(100, 212, 'radhika');
-    this.slime = this.physics.add.sprite(450, 200, 'slime');
-    console.log(this.slime.x);
+    this.player = this.physics.add.sprite(120, 212, 'radhika');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
@@ -64,20 +59,6 @@ class WoodsScene extends Phaser.Scene {
         frameRate: 10,
         repeat: -1
     });
-    this.anims.create({
-        key: 'slime-anim',
-        frames: this.anims.generateFrameNumbers('slime', { start: 0, end: 1 }),
-        frameRate: 5,
-        repeat: -1,
-        repeatDelay: 1500
-    });
-    this.anims.create({
-        key: 'slime-death',
-        frames: this.anims.generateFrameNumbers('slime', { start: 0, end: 6 }),
-        frameRate: 5,
-        repeat: 0,
-    });
-    this.slime.anims.play("slime-anim");
     this.test = this.add.text(390,25,"you should quit while you're ahead.",{ font: "16px Arial", fill: '#DA5E53'});
     this.test = this.add.text(680,240,"i'm not going to quit.",{ font: "16px Arial", fill: '#F6A6A9'});
     this.test = this.add.text(880,25,"not even your dad thinks you should keep going.",{ font: "16px Arial", fill: '#DA5E53'});    
@@ -97,18 +78,22 @@ class WoodsScene extends Phaser.Scene {
     this.test = this.add.text(6600,25,"but you can't-",{ font: "16px Arial", fill: '#DA5E53'});
     this.test = this.add.text(6800,240,"i believe in myself.",{ font: "16px Arial", fill: '#F6A6A9'});
     this.test = this.add.text(7005,245,"[SPACE] to continue",{ font: "12px Arial", fill: '#FFFFFF'});
+    this.transition = this.add.sprite(20,0,"transition");
+    this.transition.setOrigin(0,0);
+    this.transition.play("transition_off");
+    this.num = -1;
   }
 
   update() {
     if(this.player.x < 6860) {
       if(this.cursorKeys.left.isDown) {
         this.backgroundMove(-1);
-        this.player.setVelocityX(-40);
+        this.player.setVelocityX(-60);
         this.player.anims.play('left', true);
       } else 
       if(this.cursorKeys.right.isDown) {
         this.backgroundMove(1);
-        this.player.setVelocityX(400);
+        this.player.setVelocityX(60);
         this.player.anims.play('right', true);
       } else {
         this.player.setVelocityX(0);
@@ -124,24 +109,24 @@ class WoodsScene extends Phaser.Scene {
         this.player.anims.play('turn');
       }
       if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-        console.log("clicked");
+        console.log("this.num = " + this.num);
+        this.num += 1;
+      }
+      if(this.num === 0) {
+        this.transition = this.add.sprite(6767,0,"transition");
+        this.transition.setOrigin(0,0);
+        this.transition.play("transition_on");
+      } else if(this.num === 1) {
         this.scene.start("closing-screen");
       }
+      // if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+      //   console.log("clicked");
+      //   this.scene.start("closing-screen");
+      // }
     }
     this.physics.world.collide(this.player,this.ground);
-    this.physics.world.collide(this.slime,this.ground);
     this.cameras.main.startFollow(this.player);
-    this.cameras.main.setFollowOffset(-80, 76);
-    // console.log(this.player.x);
-
-    if(this.slime.x < this.player.x + 100 && this.slime.x > this.player.x + 50) {
-      this.slime.setVelocityX(-39);
-    } else if(this.slime.x > this.player.x - 100 && this.slime.x < this.player.x - 50) {
-      this.slime.setVelocityX(39);
-    } else {
-      this.slime.setVelocityX(0);
-    }
-    
+    this.cameras.main.setFollowOffset(-80, 76);    
   }
 
   backgroundMove(direction) {
