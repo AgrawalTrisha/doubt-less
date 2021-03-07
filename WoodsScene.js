@@ -39,7 +39,7 @@ class WoodsScene extends Phaser.Scene {
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.slimePlayerCollide = false;
-    this.player = this.physics.add.sprite(6660, 212, 'radhika');
+    this.player = this.physics.add.sprite(120, 212, 'radhika');
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('radhika', { start: 0, end: 7 }),
@@ -88,12 +88,12 @@ class WoodsScene extends Phaser.Scene {
     if(this.player.x < 6860) {
       if(this.cursorKeys.left.isDown) {
         this.backgroundMove(-1);
-        this.player.setVelocityX(-60);
+        this.player.setVelocityX(-80);
         this.player.anims.play('left', true);
       } else 
       if(this.cursorKeys.right.isDown) {
         this.backgroundMove(1);
-        this.player.setVelocityX(60);
+        this.player.setVelocityX(80);
         this.player.anims.play('right', true);
       } else {
         this.player.setVelocityX(0);
@@ -113,7 +113,7 @@ class WoodsScene extends Phaser.Scene {
         this.num += 1;
       }
       if(this.num === 0) {
-        this.transition = this.add.sprite(6761,0,"transition");
+        this.transition = this.add.sprite(6764,0,"transition");
         this.transition.setOrigin(0,0);
         this.transition.play("transition_on");
       } else if(this.num === 1) {
@@ -131,14 +131,14 @@ class WoodsScene extends Phaser.Scene {
 
   backgroundMove(direction) {
     if(direction === -1) {
-      this.woodsFar.tilePositionX -= 0.07;
-      this.woodsMid.tilePositionX -= 0.12;
-      this.woodsClose.tilePositionX -= 0.17;
+      this.woodsFar.tilePositionX -= 0.08;
+      this.woodsMid.tilePositionX -= 0.13;
+      this.woodsClose.tilePositionX -= 0.18;
     }
     if(direction === 1) {
-      this.woodsFar.tilePositionX += 0.07;
-      this.woodsMid.tilePositionX += 0.12;
-      this.woodsClose.tilePositionX += 0.17;
+      this.woodsFar.tilePositionX += 0.08;
+      this.woodsMid.tilePositionX += 0.13;
+      this.woodsClose.tilePositionX += 0.18;
     }
   }
 }

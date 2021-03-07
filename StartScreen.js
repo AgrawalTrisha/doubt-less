@@ -68,7 +68,7 @@ class StartScreen extends Phaser.Scene {
         console.log("up detected");
         this.counter -= 1;
       }        
-      this.choicebox = new ChoiceTextbox(this, ["No.", "I'm not going to do that."], this.counter, 135, 238);
+      this.choicebox = new ChoiceTextbox(this, ["No. I've done so much akready.", "I'm not going to do that."], this.counter, 135, 238);
     } else if(this.num === 5) {
       this.tb3 = this.add.sprite(15, 85, "tb2");
       this.words = this.add.text(22, 92,"At least take a break, then.\nYou've been at it for a while.",{ font: "12px Arial", fill: '#405A66' });
