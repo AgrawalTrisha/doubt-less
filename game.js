@@ -14,7 +14,7 @@ var config = {
     zoom: 2.5,
   },
   backgroundColor: 0xDA5E53,
-  scene: [Opening, StartScreen, WoodsScene, ClosingScreen,],
+  scene: [Opening, StartScreen, WoodsScene, ClosingScreen, Credits],
 	pixelArt: true,
 }
 

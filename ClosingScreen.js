@@ -1,80 +1,45 @@
 class ClosingScreen extends Phaser.Scene {
   constructor() {
     super("closing-screen");
-    console.log("on ClosingScreen");
   }
 
   preload() {
-    this.load.spritesheet("desktop", "assets/desktopspritesheet.png", {frameWidth:360, frameHeight: 272});
-    this.load.image("choicebox", "assets/textboxes/choicebox.png");
-    this.load.image("tb1", "assets/textboxes/radhika.png");
-    this.load.image("tb2", "assets/textboxes/maybeyoushould.png");
-    this.load.image("tb3", "assets/textboxes/takeabreak.png");
-    this.load.image("rcp-angry", "assets/RCP_angry.png");
-    this.load.image("rcp-tired", "assets/RCP_tired.png");
-    this.load.image("rcp-side", "assets/RCP_side.png");
+    this.load.spritesheet("desktop-night", "assets/desktopspritesheetnight.png", {frameWidth:360, frameHeight: 272});
   }
 
   create() {
     this.num = 0;
     this.anims.create({
-      key: "desktop_anim",
-      frames: this.anims.generateFrameNumbers("desktop"),
+      key: "desktopnight_anim",
+      frames: this.anims.generateFrameNumbers("desktop-night"),
       frameRate: 5,
       repeat: -1
     });
-    console.log("on StartScene");
-    this.desktop = this.add.sprite(0,0,"desktop");
+    this.desktop = this.add.sprite(0,0,"desktop-night");
     this.desktop.setOrigin(0,0);
-    this.desktop.play("desktop_anim");
+    this.desktop.play("desktopnight_anim");
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.counter = 0;
-    this.choicenum = 1;
-    this.counter2 = 0;
-    console.log(this.cameras.main.x);
-    console.log(this.cameras.main.y);
+    this.radhika = this.add.sprite(310,272-46, "rcp-tired");
+    this.add.sprite(135, 238, "choicebox");
+    this.words = this.add.text(20,220,"I just closed my eyes for a moment...",{ font: "12px Arial", fill: '#405A66' });
   }
 
   update() {
     if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
       console.log("this.num = " + this.num);
+      if(this.num === 0) {
+        this.words.alpha = 0;
+        this.words2 = this.add.text(20,220,"Did I really fall asleep?",{ font: "12px Arial", fill: '#405A66' });
+      } else if(this.num === 1) {
+        this.words2.alpha = 0;
+        this.words3 = this.add.text(20,220,"I know the dream I had was weird.\nBut I can't remember any of it!",{ font: "12px Arial", fill: '#405A66' });
+      } else if(this.num === 2) {
+        this.words3.alpha = 0;
+        this.words4 = this.add.text(20,218,"*sigh*. I'd better turn in for the night.\nI want to be well-rested for the state\nprogramming competition tomorrow.",{ font: "12px Arial", fill: '#405A66' });
+      } else {
+        this.scene.start("credits-screen");
+      }
       this.num += 1;
-    }
-    if(this.num === 0) {
-      this.radhika = this.add.sprite(310,272-46, "rcp-side");
-    } else if(this.num === 1) {
-      this.tb1 = this.add.sprite(15, 10, "tb1");
-      this.tb1.setOrigin(0,0);
-      // this.something = this.add.sprite(60,20, "desktop-textbox");
-      // this.add.text(8, 8, 'Phaser 3 pixelArt: true', { font: '12px Consolas', fill: '#405A66' }).setOrigin(0, 0);
-    } else if(this.num === 2) {
-      this.radhika = this.add.sprite(310,272-46, "rcp-tired");
-      this.tb2 = this.add.sprite(15, 40, "tb2");
-      this.tb2.setOrigin(0,0);
-    } else if(this.num === 3) {
-      this.radhika = this.add.sprite(310,272-46, "rcp-angry");
-      if(this.cursorKeys.down.isDown && this.counter < this.choicenum) {
-        console.log("down detected");
-        this.counter += 1;
-      } else if(this.cursorKeys.up.isDown && this.counter > 0) {
-        console.log("up detected");
-        this.counter -= 1;
-      }        
-      this.choicebox = new ChoiceTextbox(this, ["No.", "I'm not going to do that."], this.counter, 135, 238);
-    } else if(this.num === 4) {
-      this.tb3 = this.add.sprite(15, 90, "tb3");
-      this.tb3.setOrigin(0,0);
-      if(this.cursorKeys.down.isDown && this.counter2 < this.choicenum) {
-        console.log("down detected");
-        this.counter2 += 1;
-      } else if(this.cursorKeys.up.isDown && this.counter2 > 0) {
-        console.log("up detected");
-        this.counter2 -= 1;
-      }        
-      this.choicebox = new ChoiceTextbox(this, ["Fine.", "Alright."], this.counter2, 135, 238);
-    } else {
-      this.scene.start("woods-scene");
-    }
+    }    
   }
 }

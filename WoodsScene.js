@@ -42,7 +42,7 @@ class WoodsScene extends Phaser.Scene {
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.slimePlayerCollide = false;
-    this.player = this.physics.add.sprite(5000, 212, 'radhika');
+    this.player = this.physics.add.sprite(100, 212, 'radhika');
     this.slime = this.physics.add.sprite(450, 200, 'slime');
     console.log(this.slime.x);
     this.anims.create({
@@ -124,6 +124,7 @@ class WoodsScene extends Phaser.Scene {
         this.player.anims.play('turn');
       }
       if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+        console.log("clicked");
         this.scene.start("closing-screen");
       }
     }
